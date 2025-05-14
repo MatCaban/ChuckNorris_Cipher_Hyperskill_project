@@ -1,8 +1,14 @@
 package chucknorris;
+/*
+    The class handles communication with the user. It prints prompts to the console,
+    collects and validates user input. If the input passes validation,
+    it makes a decision on what to do or sends this validated input to other classes for processing.
+ */
+
 import java.util.Scanner;
 public class UserInterface {
-    private CodeMessage code = new CodeMessage();
-    private DecodeMessage decode = new DecodeMessage();
+    private final CodeMessage code = new CodeMessage();
+    private final DecodeMessage decode = new DecodeMessage();
     private String operation;
 
 
@@ -20,36 +26,6 @@ public class UserInterface {
     public void startUI() {
 
         chooseOperation();
-    }
-
-    private void getMessageToCode() {
-        System.out.println("Input string: ");
-        code.setMessageToCode(sc.nextLine());
-    }
-
-    private void printCodedMessage() {
-        System.out.println("Encoded string:");
-        System.out.println(code.toChuckNorrisEncrypt());
-        System.out.println();
-    }
-
-
-    private void getMessageToDecode() {
-        System.out.println("Input string: ");
-        String code = sc.nextLine();
-        if (validateCodedInput(code)) {
-            decode.encodeFromChuckNorris(code);
-            printDecodedMessage();
-        } else {
-            System.out.println("Encoded string is not valid.");
-        }
-
-    }
-
-    private void printDecodedMessage() {
-        System.out.println("Decoded string:");
-        System.out.println(decode.sevenDigitToChar());
-        System.out.println();
     }
 
     private void chooseOperation() {
@@ -70,8 +46,41 @@ public class UserInterface {
 
             }
         }
+    }
+
+    private void getMessageToCode() {
+        System.out.println("Input string: ");
+        code.setMessageToCode(sc.nextLine());
+    }
+
+    private void printCodedMessage() {
+        System.out.println("Encoded string:");
+        System.out.println(code.toChuckNorrisEncrypt());
+        System.out.println();
+    }
+
+
+    private void getMessageToDecode() {
+        System.out.println("Input string: ");
+        String code = sc.nextLine();
+        if (validateCodedInput(code)) {
+            decode.decodeFromChuckNorris(code);
+            printDecodedMessage();
+        } else {
+            System.out.println("Encoded string is not valid.");
+            System.out.println();
+        }
 
     }
+
+    private void printDecodedMessage() {
+        System.out.println("Decoded string:");
+        System.out.println(decode.convertCodeToString());
+        System.out.println();
+    }
+
+
+    // validate user input for provided operations
 
     private String validateOperationInput() {
         while (true) {
@@ -87,6 +96,8 @@ public class UserInterface {
             }
         }
     }
+
+    // checking all 4 requirements for valid code message
 
     private boolean validateCodedInput(String code) {
             return (hasOnlyZeroesOrOnes(code)

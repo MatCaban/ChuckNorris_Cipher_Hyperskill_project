@@ -1,6 +1,9 @@
 package chucknorris;
-
-import java.util.Arrays;
+/*
+The class handles the encoding of a given string. The string is split into individual characters,
+and each character is converted to its 7-bit binary value. If it doesn't have 7 bits, a 0 is added at the beginning.
+Subsequently, it is encrypted, and the class returns the encrypted string.
+ */
 
 public class CodeMessage {
     private String messageToCode;
@@ -13,13 +16,6 @@ public class CodeMessage {
         this.messageToCode = message;
     }
 
-    public String getMessageToCode() {
-        return this.messageToCode;
-    }
-
-    public char[] getSplitMessageToCode() {
-        return splitMessageToCode;
-    }
 
     // split string to char array
 
@@ -42,7 +38,7 @@ public class CodeMessage {
         return binary;
     }
 
-    // encrypt string with 7 digits binary representing each charr to chuck norris encrypt
+    // encrypt binary string to chuck norris encrypt
     public String toChuckNorrisEncrypt(){
         String[] binary = charactersToBinary().split("");
         String output = "";
