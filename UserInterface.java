@@ -39,6 +39,7 @@ public class UserInterface {
         String code = sc.nextLine();
         if (validateCodedInput(code)) {
             decode.encodeFromChuckNorris(code);
+            printDecodedMessage();
         } else {
             System.out.println("Encoded string is not valid.");
         }
@@ -66,7 +67,7 @@ public class UserInterface {
             }
             if (this.operation.equals("decode")) {
                 getMessageToDecode();
-                printDecodedMessage();
+
             }
         }
 
