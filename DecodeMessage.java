@@ -29,7 +29,7 @@ public class DecodeMessage {
         }
     }
 
-    // split encoded string in binary to parts for 7 digits
+    // split encoded string in binary to parts of 7 digits
 
     private String[] splitEncodeToSevenDigits() {
 

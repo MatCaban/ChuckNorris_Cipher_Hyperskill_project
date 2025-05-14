@@ -36,6 +36,7 @@ public class UserInterface {
 
     private void getMessageToDecode() {
         System.out.println("Input string: ");
+
         decode.encodeFromChuckNorris(sc.nextLine());
     }
 
@@ -58,7 +59,8 @@ public class UserInterface {
                 printCodedMessage();
             }
             if (this.operation.equals("decode")) {
-                getMessageToDecode();
+                validateCodedInput();
+               // getMessageToDecode();
                 printDecodedMessage();
             }
         }
@@ -77,9 +79,31 @@ public class UserInterface {
                 System.out.printf("There is no %s operation%n", this.operation);
                 System.out.println();
             }
-
-
         }
+    }
 
+    private void validateCodedInput() {
+        while (true) {
+            System.out.println("Input string: ");
+            String code = sc.nextLine();
+            System.out.println(hasOnlyZeroesOrOnes(code));
+            break;
+        }
+    }
+
+    // check if input string contains only zeroes and spaces
+
+    private boolean hasOnlyZeroesOrOnes(String code) {
+        boolean isValid = true;
+        String[] toArr = code.split("");
+        for (String letter : toArr) {
+            if (letter.equals("0")
+            || letter.equals(" ")){
+            } else {
+                isValid = false;
+                break;
+            }
+        }
+        return isValid;
     }
 }
