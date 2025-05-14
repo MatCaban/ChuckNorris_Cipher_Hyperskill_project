@@ -1,5 +1,4 @@
 package chucknorris;
-import java.util.Arrays;
 import java.util.Scanner;
 public class UserInterface {
     private CodeMessage code = new CodeMessage();
@@ -19,36 +18,51 @@ public class UserInterface {
 
 
     public void startUI() {
-       // getMessageFromUser();
 
-       // printResult();
-
-//        decodeMessage();
         chooseOperation();
     }
 
-    private void getMessageFromUser() {
+    private void getMessageToCode() {
         System.out.println("Input string: ");
         code.setMessageToCode(sc.nextLine());
     }
 
-    private void printResult() {
-        System.out.println("The result:");
+    private void printCodedMessage() {
+        System.out.println("Encoded string:");
         System.out.println(code.toChuckNorrisEncrypt());
+        System.out.println();
     }
 
 
-    private void decodeMessage() {
+    private void getMessageToDecode() {
         System.out.println("Input string: ");
         decode.encodeFromChuckNorris(sc.nextLine());
+    }
 
-        System.out.println("The result:");
+    private void printDecodedMessage() {
+        System.out.println("Decoded string:");
         System.out.println(decode.sevenDigitToChar());
+        System.out.println();
     }
 
     private void chooseOperation() {
+        while (true) {
+            this.operation = validateOperationInput();
 
-        this.operation = validateOperationInput();
+            if (this.operation.equals("exit")) {
+                break;
+            }
+
+            if (this.operation.equals("encode")) {
+                getMessageToCode();
+                printCodedMessage();
+            }
+            if (this.operation.equals("decode")) {
+                getMessageToDecode();
+                printDecodedMessage();
+            }
+        }
+
     }
 
     private String validateOperationInput() {
