@@ -36,8 +36,13 @@ public class UserInterface {
 
     private void getMessageToDecode() {
         System.out.println("Input string: ");
+        String code = sc.nextLine();
+        if (validateCodedInput(code)) {
+            decode.encodeFromChuckNorris(code);
+        } else {
+            System.out.println("Encoded string is not valid.");
+        }
 
-        decode.encodeFromChuckNorris(sc.nextLine());
     }
 
     private void printDecodedMessage() {
@@ -51,6 +56,7 @@ public class UserInterface {
             this.operation = validateOperationInput();
 
             if (this.operation.equals("exit")) {
+                System.out.println("Bye!");
                 break;
             }
 
@@ -59,8 +65,7 @@ public class UserInterface {
                 printCodedMessage();
             }
             if (this.operation.equals("decode")) {
-                validateCodedInput();
-               // getMessageToDecode();
+                getMessageToDecode();
                 printDecodedMessage();
             }
         }
@@ -82,14 +87,12 @@ public class UserInterface {
         }
     }
 
-    private void validateCodedInput() {
-        while (true) {
-            System.out.println("Input string: ");
-            String code = sc.nextLine();
-            System.out.println(hasOnlyZeroesOrOnes(code));
-            System.out.println(isNumberOfBlockEven(code));
-            break;
-        }
+    private boolean validateCodedInput(String code) {
+            return (hasOnlyZeroesOrOnes(code)
+            && isNumberOfBlockEven(code)
+            && isValidStartOfBlock(code)
+            && isAtLeastSevenDigits(code));
+
     }
 
     // check if input string contains only zeroes and spaces
@@ -108,8 +111,34 @@ public class UserInterface {
         return isValid;
     }
 
+    // checking if number of block is not odd
+
     private boolean isNumberOfBlockEven(String code) {
         String[] toArr = code.split(" ");
         return toArr.length % 2 == 0;
+    }
+
+    // checking if each block of code start with 0 or 00
+
+    private boolean isValidStartOfBlock(String code) {
+        boolean isValid = true;
+        String[] toArr = code.split(" ");
+        for (int i = 0; i < toArr.length; i += 2) {
+            if (toArr[i].equals("0")
+            || toArr[i].equals("00")) {
+
+            } else {
+                isValid = false;
+                break;
+            }
+        }
+        return isValid;
+    }
+
+    // check if code has at least seven digit
+
+    private boolean isAtLeastSevenDigits(String code) {
+        String[] toArr = code.split(" ");
+        return (toArr.length / 2) % 7 == 0;
     }
 }
