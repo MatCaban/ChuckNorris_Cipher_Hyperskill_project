@@ -61,7 +61,7 @@ public class UserInterface {
 
 
     private void getMessageToDecode() {
-        System.out.println("Input string: ");
+        System.out.println("Input encoded string:");
         String code = sc.nextLine();
         if (validateCodedInput(code)) {
             decode.decodeFromChuckNorris(code);
@@ -100,7 +100,7 @@ public class UserInterface {
     // checking all 4 requirements for valid code message
 
     private boolean validateCodedInput(String code) {
-            return (hasOnlyZeroesOrOnes(code)
+            return (hasOnlyZeroes(code)
             && isNumberOfBlockEven(code)
             && isValidStartOfBlock(code)
             && isAtLeastSevenDigits(code));
@@ -109,7 +109,7 @@ public class UserInterface {
 
     // check if input string contains only zeroes and spaces
 
-    private boolean hasOnlyZeroesOrOnes(String code) {
+    private boolean hasOnlyZeroes(String code) {
         boolean isValid = true;
         String[] toArr = code.split("");
         for (String letter : toArr) {
@@ -135,6 +135,9 @@ public class UserInterface {
     private boolean isValidStartOfBlock(String code) {
         boolean isValid = true;
         String[] toArr = code.split(" ");
+
+        // iterate only through even indexes, that is where 0 or 1 is coded
+
         for (int i = 0; i < toArr.length; i += 2) {
             if (toArr[i].equals("0")
             || toArr[i].equals("00")) {
@@ -147,10 +150,18 @@ public class UserInterface {
         return isValid;
     }
 
-    // check if code has at least seven digit
+    // check if code message can be equally divided by 7
 
     private boolean isAtLeastSevenDigits(String code) {
         String[] toArr = code.split(" ");
-        return (toArr.length / 2) % 7 == 0;
+        int count = 0;
+
+        // iterate through odd indexes, and count total number of coded zeroes or ones
+        for (int i = 1; i < toArr.length; i += 2) {
+            count += toArr[i].length();
+        }
+
+        // check if count is divisible by 7 DecodeMessage requirement
+        return count % 7 == 0;
     }
 }
