@@ -87,6 +87,7 @@ public class UserInterface {
             System.out.println("Input string: ");
             String code = sc.nextLine();
             System.out.println(hasOnlyZeroesOrOnes(code));
+            System.out.println(isNumberOfBlockEven(code));
             break;
         }
     }
@@ -105,5 +106,10 @@ public class UserInterface {
             }
         }
         return isValid;
+    }
+
+    private boolean isNumberOfBlockEven(String code) {
+        String[] toArr = code.split(" ");
+        return toArr.length % 2 == 0;
     }
 }
