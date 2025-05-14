@@ -47,12 +47,25 @@ public class UserInterface {
     }
 
     private void chooseOperation() {
-        System.out.println("Please input operation (encode/decode/exit):");
-        validateOperationInput();
+
+        this.operation = validateOperationInput();
     }
 
-    private void validateOperationInput() {
-        this.operation = sc.nextLine();
-        System.out.println(this.operation);
+    private String validateOperationInput() {
+        while (true) {
+            System.out.println("Please input operation (encode/decode/exit):");
+            this.operation = sc.nextLine();
+            if (this.operation.equals("exit")
+            || this.operation.equals("encode")
+            || this.operation.equals("decode")) {
+                return this.operation;
+            } else {
+                System.out.printf("There is no %s operation%n", this.operation);
+                System.out.println();
+            }
+
+
+        }
+
     }
 }
