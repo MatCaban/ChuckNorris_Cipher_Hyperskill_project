@@ -45,15 +45,22 @@ public class CodeMessage {
         int index = 1;
         String previous = binary[0];
 
+        // decide start of coded block
+
         output += binary[0].equals("0")
                 ? "00 0"
                 : "0 0";
 
         while (index < binary.length) {
 
+            // If the same numbers follow each other, only a zero is added
+
             if (binary[index].equals(previous)) {
                 output += "0";
             } else {
+
+                // otherwise, the next number is determined, and a new block begins
+
                 output += binary[index].equals("0")
                         ? " 00 0"
                         : " 0 0";
