@@ -91,7 +91,7 @@ public class UserInterface {
             || this.operation.equals("decode")) {
                 return this.operation;
             } else {
-                System.out.printf("There is no %s operation%n", this.operation);
+                System.out.printf("There is no '%s' operation%n", this.operation);
                 System.out.println();
             }
         }
